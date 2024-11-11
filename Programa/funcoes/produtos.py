@@ -30,8 +30,8 @@ def cadastrar(vendedor = None):
     print("Produto cadastrado com sucesso!")
     if not comVendedor:
         if not vendedor.get("produtos"):
-            vendedor["produtos"] = set()
-        vendedor["produtos"].add(id)
+            vendedor["produtos"] = []
+        vendedor["produtos"].append(id)
         atualizar = atualizarDado("Vendedores", vendedor)
 
         if not atualizar:
@@ -41,12 +41,12 @@ def cadastrar(vendedor = None):
     return id
    
 def cadastrarMultiplos(vendedor):
-    produtos = set()
+    produtos = []
     while True:
         limparTerminal()
         produto = cadastrar(vendedor)
         if produto:
-            produtos.add(produto)
+            produtos.append(produto)
         if input("Deseja cadastrar mais algum produto? (S/N)").upper() != 'S':
             break
     return produtos
@@ -172,7 +172,7 @@ def listar():
 def gerenciar(vendedor):
     if not vendedor:
         return
-    produtos = set()
+    produtos = []
     if vendedor.get("produtos"):
         produtos = vendedor["produtos"]
     while True:
@@ -211,7 +211,7 @@ def gerenciar(vendedor):
         elif opcaoEscolhida == "1":
             produto = cadastrar(vendedor)
             if produto:
-                produtos.add(produto)
+                produtos.append(produto)
         elif opcaoEscolhida == "2" and quantidade > 0:
             produto = escolherProduto(produtos)
             if produto:

@@ -21,7 +21,7 @@ def cadastrar(favoritos):
 
 def gerenciar(favoritos):
     if not favoritos:
-        favoritos = set()
+        favoritos = []
     while True:
         quantidade = len(favoritos)
 
@@ -57,7 +57,7 @@ def gerenciar(favoritos):
         elif opcaoEscolhida == "1":
             favorito = cadastrar(favoritos)
             if favorito:
-                favoritos.add(favorito)
+                favoritos.append(favorito)
         elif opcaoEscolhida == "2":
             favoritoEscolhido = escolherFavorito(favoritos, True)
             if favoritoEscolhido:

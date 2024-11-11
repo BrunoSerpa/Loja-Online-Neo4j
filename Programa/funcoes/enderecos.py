@@ -30,13 +30,13 @@ def cadastrar():
     return cadastrarEndereco("Enderecos", endereco)
 
 def cadastrarMultiplos():
-    enderecos = set()
+    enderecos = []
 
     while True:
         limparTerminal()
         id_endereco = cadastrar()
         if id_endereco:
-            enderecos.add(id_endereco)
+            enderecos.append(id_endereco)
         if input("Deseja cadastrar mais algum endereço? (S/N)").upper() != 'S':
             break
     return enderecos
@@ -136,7 +136,7 @@ def gerenciar(enderecos):
         elif opcaoEscolhida == "1":
             endereco = cadastrar()
             if endereco:
-                enderecos.add(endereco)
+                enderecos.append(endereco)
         elif opcaoEscolhida == "2" and quantidade > 0:
             enderecoEscolhido = escolherEndereco(enderecos)
             if not enderecoEscolhido:

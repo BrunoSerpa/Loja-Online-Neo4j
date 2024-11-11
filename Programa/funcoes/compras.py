@@ -37,7 +37,7 @@ def cadastrar(cliente = None):
     if not produtos_disponiveis:
         return None
 
-    produtos = set()
+    produtos = []
     valor_total = 0.0
     while len(produtos_disponiveis) > 0:
         produto = escolherProduto(produtos_disponiveis)
@@ -45,7 +45,7 @@ def cadastrar(cliente = None):
             return None
         
         produtos_disponiveis.remove(produto.get("id"))
-        produtos.add(produto.get("id"))
+        produtos.append(produto.get("id"))
 
         valor_total += float(produto.get("valor_produto"))
         if len(produtos_disponiveis) == 0:
@@ -70,7 +70,9 @@ def cadastrar(cliente = None):
     
     if id:
         print("Compra cadastrada com sucesso")
-        vendedor["vendas"].add(id)
+        if not vendedor.get("vendas"):
+            vendedor["vendas"] = []
+        vendedor["vendas"].append(id)
         vendedor["produtos"] = produtos_disponiveis
         atualizar = atualizarDado("Vendedores", vendedor)
         if not atualizar:
@@ -78,7 +80,9 @@ def cadastrar(cliente = None):
         print("Vendedor vinculado com sucesso!")
 
         if not comCliente:
-            cliente["compras"].add(id)
+            if not cliente.get("compras"):
+                cliente["compras"] = []
+            cliente["compras"].append(id)
             atualizar = atualizarDado("Usuarios", cliente)
             if not atualizar:
                 return None
@@ -86,12 +90,14 @@ def cadastrar(cliente = None):
         return id
 
 def cadastrarMultiplos(cliente):
-    compras = cliente.get("compras")
+    compras = []
+    if cliente.get("compras"):
+        compras = cliente.get("compras")
     while True:
         limparTerminal()
         compra = cadastrar(cliente)
         if compra:
-            compras.add(compra)
+            compras.append(compra)
         if entrada("Deseja cadastrar mais alguma compra? (S/N)", "SimOuNao", "Insira 'S' para sim, ou 'N' para não").upper() != 'S':
             break
     return compras
@@ -126,7 +132,7 @@ def deletar(vendedor = None):
             print("Compra removida do cliente!")
 
         for produto in venda["produtos"]:
-            vendedor["produtos"].add(produto)
+            vendedor["produtos"].append(produto)
 
         vendedor["vendas"].remove(venda.get("id"))
         if not comVendedor:
