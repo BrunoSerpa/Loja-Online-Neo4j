@@ -52,6 +52,7 @@ def gerenciar(favoritos):
         
         print("\nQual ação deseja realizar?")
         opcaoEscolhida = entrada("Insira uma opção", "Numero", "Insira uma opção válida")
+        limparTerminal()
         if opcaoEscolhida == "0":
             return favoritos
         elif opcaoEscolhida == "1":
