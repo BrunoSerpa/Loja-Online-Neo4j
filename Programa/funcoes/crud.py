@@ -149,3 +149,13 @@ def vincularRelacao(id, campo, item_id, label):
         except Exception as e:
             salvarErro(f"Erro ao criar a relação {relacao}", e)
             return False
+
+def fecharConexao():
+    try:
+        if sessao:
+            sessao.close()
+        if driver:
+            driver.close()
+        print("Conexão com o Neo4j encerrada com sucesso.")
+    except Exception as e:
+        salvarErro("Erro ao encerrar conexão com o Neo4j", e)

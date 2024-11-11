@@ -1,6 +1,7 @@
 from Programa.funcoes.utils.limpar import limparTerminal
 from Programa.funcoes.utils.separar import separador1, separador2
 from Programa.funcoes.utils.entrada import entrada
+from Programa.funcoes.crud import fecharConexao
 
 import Programa.funcoes.produtos as produtos
 import Programa.funcoes.compras as compras
@@ -21,6 +22,8 @@ def menuExibido(titulo, opcoes, textoVoltar = 'Voltar'):
         opcaoEscolhida = entrada("Insira uma opção","Numero", "Insira uma das opções!")
         limparTerminal()
         if opcaoEscolhida == '0':
+            if textoVoltar != 'Voltar':
+                fecharConexao()
             break
         try:
             opcaoIndex = int(opcaoEscolhida) - 1

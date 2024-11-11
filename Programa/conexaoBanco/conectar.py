@@ -6,7 +6,7 @@ from Programa.funcoes.utils.salvarErro import salvarErro
 def conectar():
     try:
         driver = GraphDatabase.driver(uri, auth = (user, password))
-        return driver.session()
+        return driver, driver.session()
     except Exception as e:
         salvarErro("Erro ao conectar ao Cassandra", e)
         return None
