@@ -1,5 +1,3 @@
-from uuid import UUID
-
 from Programa.funcoes.crud import buscarPorId
 from Programa.funcoes.utils.entrada import entrada
 from Programa.funcoes.utils.limpar import limparTerminal
@@ -9,7 +7,7 @@ import Programa.funcoes.utils.visualizar as visualizar
 
 def preparar_item(item, tipo):
     try:
-        if isinstance(item, UUID):
+        if isinstance(item, str):
             item = buscarPorId(tipo, item)
             if not item:
                 print(f"ID inválido para {tipo}: {item}")
