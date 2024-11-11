@@ -4,8 +4,7 @@ from Programa.funcoes.utils.separar import separador1, separador2
 from Programa.funcoes.utils.escolher import vendedor as escolherVendedor
 from Programa.funcoes.utils.visualizar import vendedor as visualizarVendedor
 
-from Programa.funcoes.crud import cadastrar as cadastrarVendedor, atualizar as atualizarVendedor, buscarPorAtributo, buscarTodos, excluir as excluirDado, buscarPorId
-
+from Programa.funcoes.crud import cadastrar as cadastrarVendedor, atualizar as atualizarVendedor, buscarPorAtributo, buscarTodos, excluir as excluirDado 
 from Programa.funcoes.enderecos import cadastrarMultiplos as cadastrarEnderecos, gerenciar as gerenciarEnderecos
 from Programa.funcoes.produtos import cadastrarMultiplos as cadastrarProdutos, gerenciar as gerenciarProdutos
 from Programa.funcoes.compras import deletar as deletarVenda
@@ -34,7 +33,7 @@ def cadastrar():
             print("Endereços vinculados com sucesso!")
 
         if entrada("Deseja cadastra seus produtos? (S/N)", "SimOuNao", "Insira 'S' para sim, ou 'N' para não.").upper() == 'S':
-            vendedor["produtos"] = cadastrarProdutos(buscarPorId("Vendedores", vendedor["id"]))
+            vendedor["produtos"] = cadastrarProdutos(vendedor)
             atualizar_produtos = atualizarVendedor("Vendedores", vendedor)
             if not atualizar_produtos:
                 return
